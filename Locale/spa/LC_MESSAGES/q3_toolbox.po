@@ -1,0 +1,77 @@
+# LANGUAGE translation of CakePHP Application
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Q3Toolbox\n"
+"POT-Creation-Date: 2013-07-02 13:01+0200\n"
+"PO-Revision-Date: 2013-07-02 13:23+0100\n"
+"Last-Translator: Juan Vicente Vercher <juanvi@artvisual.net>\n"
+"Language-Team: Artvisual <juanvi.v@gmail.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n==1?0:1);\n"
+"Language: Spanish\n"
+"X-Generator: Poedit 1.5.4\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+
+#: View/Helper/CalendarHelper.php:69
+msgid "no date"
+msgstr "sin fecha"
+
+#: View/Helper/CalendarHelper.php:104
+msgid "Show calendar"
+msgstr "Mostrar calendario"
+
+#: View/Helper/CalendarHelper.php:274
+msgid "prev"
+msgstr "ant."
+
+#: View/Helper/CalendarHelper.php:280
+msgid "next"
+msgstr "sig."
+
+#: View/Helper/DateHelper.php:84
+msgid "less than a minute"
+msgstr "menos de un minuto"
+
+#: View/Helper/DateHelper.php:87
+msgid "one minute ago"
+msgstr "hace un minuto"
+
+#: View/Helper/DateHelper.php:90
+msgid "%s minutes ago"
+msgstr "hace %s minutos"
+
+#: View/Helper/DateHelper.php:93
+msgid "one hour ago"
+msgstr "hace una hora"
+
+#: View/Helper/DateHelper.php:96
+msgid "%s hours ago"
+msgstr "hace %s horas"
+
+#: View/Helper/DateHelper.php:99
+msgid "yesterday"
+msgstr "ayer"
+
+#: View/Helper/DateHelper.php:102
+msgid "%s days ago"
+msgstr "hace %s días"
+
+#: View/Helper/DateHelper.php:105
+msgid "last month"
+msgstr "el mes pasado"
+
+#: View/Helper/DateHelper.php:108
+msgid "%s months ago"
+msgstr "hace %s meses"
+
+#: View/Helper/DateHelper.php:111
+msgid "last year"
+msgstr "el año pasado"
+
+#: View/Helper/DateHelper.php:114
+msgid "%s years ago"
+msgstr "hace %s años"
