@@ -53,7 +53,8 @@ class DateHelper extends Helper
 		 */
 		$date_value=strtotime($date);
 		$format_string = str_replace('%O', date('S', $date_value), $format_string);
-		$date_string=strftime($format_string,strtotime($date_value));
+
+		$date_string=strftime($format_string,$date_value);
 		/*
 		 * htmlentities ftw
 		 */

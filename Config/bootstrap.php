@@ -22,3 +22,7 @@ switch($active_lang){
 	break;
 }
 setlocale(LC_TIME,$local);
+
+
+App::uses('Security', 'Utility');
+Security::setHash('blowfish');
