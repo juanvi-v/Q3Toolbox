@@ -1,4 +1,22 @@
 <?php
+/**
+ * Q3Toolbox misc tools helper
+ *
+ * PHP version 5
+ *
+ * Copyright (c) 2013, Juanvi Vercher
+ *
+ * Licensed under The MIT License
+ * Redistributions of files must retain the above copyright notice.
+ *
+ * @copyright     Copyright (c) 2013, Juanvi Vercher
+ * @link          www.artvisual.net
+ * @package       Q3Toolbox
+ * @subpackage    Q3Toolbox.helpers
+ * @since         v 0.5.0 (07-Jul-2013)
+ * @license       http://www.opensource.org/licenses/mit-license.php The MIT License
+ *
+ */
 class ToolsHelper extends Helper
 {
 	var $name='Tools';
