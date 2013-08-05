@@ -155,4 +155,34 @@ class DateHelper extends Helper
 
 		return $yearDiff;
 	}
+
+	/** @method parseSeconds
+	 *
+	 * @param int $seconds
+	 * @param array $options
+	 *
+	 * formats a numer of seconds as hours:minutes
+	 */
+	function parseSeconds($seconds=0,$options=array()){
+		$hours=$seconds/3600;
+		$remains=$seconds%3600;
+		$hours=($seconds-$remains)/3600;
+		$seconds=$remains%60;
+		$minutes=($remains-$seconds)/60;
+
+
+		if(empty($options['format'])){
+			$format='default';
+		}
+		else{
+			$format=$options['format'];
+		}
+		switch($format){
+			case 'default':
+				default: $output=sprintf('%sh %sm',$hours,$minutes);
+				break;
+		}
+
+		return($output);
+	}
 }//class
