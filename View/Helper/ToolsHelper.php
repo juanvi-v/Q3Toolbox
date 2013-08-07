@@ -175,8 +175,8 @@ class ToolsHelper extends Helper
     			'currency_position'=>'after'
     	);
 
-    	foreach($options_procesar as $option=>$default_value){
-    		if(isset($options[$opcion])){
+    	foreach($default_options as $option=>$default_value){
+    		if(isset($options[$option])){
     			$$option=$options[$option];
     		}
     		else{
@@ -194,7 +194,7 @@ class ToolsHelper extends Helper
     	$formated_price=number_format(sprintf($price_format,$price),$decimal_positions,$decimal_separator,$thousands_separator);
 
     	if(!empty($currency)){
-    		if($currency_position='before'){
+    		if($currency_position=='before'){
     			$formated_price=$currency.$formated_price;
     		}
     		else{

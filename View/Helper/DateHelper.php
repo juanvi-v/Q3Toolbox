@@ -29,7 +29,7 @@ class DateHelper extends Helper
 	 * @param string $format default 'normal' localized versions of format strings
 	 * @param datetime $fecha default 'Now'
 	 */
-	function dateFormat($format='normal',$date='Now'){
+	function dateFormat($date='Now',$format='normal'){
 		switch($format){
 			case 'abreviada': $format_string='%d/%m/%Y'; //European date format
 							  break;
@@ -100,37 +100,37 @@ class DateHelper extends Helper
 		$now_timestamp = time();
 		$difference = $now_timestamp-$date_timestamp;
 		if($difference<$minute){
-			return __d('q3_toolbox','less than a minute',true);
+			return __d('q3_toolbox','less than a minute');
 		}
 		elseif($difference<2*$minute){
-			return __d('q3_toolbox','one minute ago',true);
+			return __d('q3_toolbox','one minute ago');
 		}
 		elseif($difference<$hour){
-			return sprintf(__d('q3_toolbox','%s minutes ago',true),floor($difference/$minute));
+			return sprintf(__d('q3_toolbox','%s minutes ago'),floor($difference/$minute));
 		}
 		elseif($difference<2*$hour){
-			return __d('q3_toolbox','one hour ago',true);
+			return __d('q3_toolbox','one hour ago');
 		}
 		elseif($difference<$day){
-			return sprintf(__d('q3_toolbox','%s hours ago',true),floor($difference/$hour));
+			return sprintf(__d('q3_toolbox','%s hours ago'),floor($difference/$hour));
 		}
 		elseif($difference<2*$day){
-			return __d('q3_toolbox','yesterday',true);
+			return __d('q3_toolbox','yesterday');
 		}
 		elseif($difference<$month){
-			return sprintf(__d('q3_toolbox','%s days ago',true),floor($difference/$day));
+			return sprintf(__d('q3_toolbox','%s days ago'),floor($difference/$day));
 		}
 		elseif($difference<2*$month){
-			return __d('q3_toolbox','last month',true);
+			return __d('q3_toolbox','last month');
 		}
 		elseif($difference<$year){
-			return sprintf(__d('q3_toolbox','%s months ago',true),floor($difference/$month));;
+			return sprintf(__d('q3_toolbox','%s months ago'),floor($difference/$month));;
 		}
 		elseif($difference<2*$year){
-			return __d('q3_toolbox','last year',true);
+			return __d('q3_toolbox','last year');
 		}
 		else{
-			return sprintf(__d('q3_toolbox','%s years ago',true),floor($difference/$year));;
+			return sprintf(__d('q3_toolbox','%s years ago'),floor($difference/$year));;
 		}
 	}
 
