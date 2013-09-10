@@ -22,6 +22,77 @@ class ToolsComponent extends Component
 		return (float)$str;
 	}
 
+	/**
+	 * @method priceFormat
+	 * formats prices, with given options.
+	 * useful to change sitewide price formatting
+	 * @param unknown_type $price
+	 * @param unknown_type $options
+	 * @return Ambigous <string, unknown>
+	 */
+	function priceFormat($price,$options=array()){
+		/*
+		 * These constants should be defined in bootstrap;
+		*/
+		if(defined('IVA')){
+			$iva=IVA;
+		}
+		else{
+			$iva=0.21;
+		}
+		if(defined('PRICE_FORMAT')){
+			$price_format=PRICE_FORMAT;
+		}
+		else{
+			$price_format='%01.2f';
+		}
+
+
+
+
+		$default_options=array(	'price_format'=>$price_format,
+				'decimal_separator'=>'.',
+				'thousands_separator'=>',',
+				'decimal_positions'=>2,
+				'currency'=>'&nbsp;&euro;',
+				'currency_position'=>'after'
+		);
+		if(Configure::check('Config.price_options')){
+			$app_options=Configure::read('Config.price_options');
+			$default_options=am($default_options,$app_options);
+		}
+
+
+
+		foreach($default_options as $option=>$default_value){
+			if(isset($options[$option])){
+				$$option=$options[$option];
+			}
+			else{
+				$$option=$default_value;
+			}
+
+		}
+		/*
+		 * price includes VAT (IVA) and shoud be substracted.
+		*/
+		if(!empty($options['without_iva'])){
+			$price*=1.0/(1.0+$iva);
+		}
+
+		$formated_price=number_format(sprintf($price_format,$price),$decimal_positions,$decimal_separator,$thousands_separator);
+
+		if(!empty($currency)){
+			if($currency_position=='before'){
+				$formated_price=$currency.$formated_price;
+			}
+			else{
+				$formated_price.=$currency;
+			}
+		}
+
+		return $formated_price;
+	}
 
 
 	/**
