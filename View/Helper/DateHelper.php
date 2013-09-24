@@ -32,37 +32,42 @@ class DateHelper extends Helper
 	function dateFormat($date='Now',$format='normal'){
 		switch($format){
 			case 'abreviada': $format_string='%d/%m/%Y'; //European date format
-							  break;
+				break;
 			case 'abbreviated': $format_string='%m/%d/%Y'; //American date format
-						  break;
+				break;
+			case 'abreviada_hora': $format_string='%d/%m/%Y, %H:%M'; //European date format
+				break;
+			case 'abbreviated_hour': $format_string='%m/%d/%Y, %H:%M'; //American date format
+				break;
 			case 'ampliada': $format_string='%e de %B de %Y';
-							break;
+				break;
 			case 'extended': $format_string='%e%O %B %Y';
-							break;
+				break;
 			case 'extended_am': $format_string='%B %e%O, %Y';
-							break;
+				break;
 			case 'ampliada_hora': $format_string='%e de %B de %Y, %H:%M';
-							break;
+				break;
 			case 'extended_hour': $format_string='%e%O %B %Y, %H:%M';
-							break;
+				break;
 			case 'extended_hour_am': $format_string='%B %e%O, %Y, %H:%M';
-							break;
+				break;
 			case 'semana': $format_string='%A, %e de %B de %Y';
-							break;
+				break;
 			case 'week': $format_string='%A, %e%O %B %Y';
-							break;
+				break;
 			case 'week_am': $format_string='%A, %B %e%O, %Y';
-							break;
+				break;
 			case 'semana_hora': $format_string='%A, %d de %B de %Y, %H:%M';
-							break;
+				break;
 			case 'week_hour': $format_string='%A, %e%O %B %Y, %H:%M';
-							break;
+				break;
 			case 'week_hour_am': $format_string='%A, %B %e%O, %Y, %H:%M';
-							break;
+				break;
 			case 'marca':
-			case 'timestamp';
-							$format_string='%d/%m/%Y %H:%M:%S';
-							  break;
+			case 'timestamp': $format_string='%d/%m/%Y %H:%M:%S';
+				break;
+			case 'compacta_hora': $format_string='%e %b %Y, %H:%M';
+				break;
 			case 'normal':
 			default:		$format_string='%e %b %Y';
 		}
