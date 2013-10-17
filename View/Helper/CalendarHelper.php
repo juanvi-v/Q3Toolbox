@@ -24,6 +24,11 @@ class CalendarHelper extends FormHelper
 	var $model;
 	var $field;
 
+	/**
+	 * @TODO lots of changes
+	 * make more generic
+	 * update php syntax
+	 */
 
 
 /**
@@ -329,22 +334,22 @@ Calendar.setup({
     			//$first_day_in_month = strtolower($first_day_in_month);
     			if((($first_day_in_month) == $i || $day > 1) && ($day <= $days_in_month)) {
 
-    				$clase_temporada='';
-    				$fecha_procesada=sprintf('%04d-%02d-%02d',$year,$month_num,$day);
+    				$period_class="";
+    				$processed_date=sprintf('%04d-%02d-%02d',$year,$month_num,$day);
 
-    				if(isset($options['temporadas'])):
+    				if(isset($options['periods'])):
 
 
 
-					//debug($fecha_procesada);
-					/*
-					 * Si quitamos el if (empty invertiremos la prioridad de las temporadas
+					//debug($processed_date);
+					/**
+					 * Removing the "if empty" clause, the priority will be reversed
 					 */
 
-						foreach($options['temporadas'] as $temporada):
-							if(empty($clase_temporada)){
-								if(($fecha_procesada>=$temporada['Temporada']['inicio']) && ($fecha_procesada<=$temporada['Temporada']['fin'])){
-									$clase_temporada='temporada_color_'.$temporada['Temporada']['color'];
+						foreach($options['periods'] as $period):
+							if(empty($period_class)){
+								if(($processed_date>=$period['Period']['start_date']) && ($processed_date<=$period['Period']['end_date'])){
+									$period_class='period_color_'.$period['Period']['color'];
 								}
 							}
 						endforeach;
@@ -360,14 +365,14 @@ Calendar.setup({
 					$cantidad_habitacion=false;
 
 
-					//debug($fecha_procesada);
+					//debug($processed_date);
 					/*
 					 * Si quitamos el if (empty invertiremos la prioridad de las temporadas
 					 */
 
 						foreach($options['habitacion_limites'] as $habitacion_limite):
 							//if(!($cantidad_habitacion)){
-								if(($fecha_procesada>=$habitacion_limite[$options['habitacion_limites_modelo']]['inicio']) && ($fecha_procesada<=$habitacion_limite[$options['habitacion_limites_modelo']]['fin'])){
+								if(($processed_date>=$habitacion_limite[$options['habitacion_limites_modelo']]['inicio']) && ($processed_date<=$habitacion_limite[$options['habitacion_limites_modelo']]['fin'])){
 									$cantidad_habitacion=$habitacion_limite[$options['habitacion_limites_modelo']]['cantidad'];
 
 								}
@@ -386,14 +391,14 @@ Calendar.setup({
 					$bonificacion_tipo=false;
 
 
-					//debug($fecha_procesada);
+					//debug($processed_date);
 					/*
 					 * Si quitamos el if (empty invertiremos la prioridad de las temporadas
 					 */
 
 						foreach($options['bonificaciones'] as $bonificacion):
 							//if(!($cantidad_habitacion)){
-								if(($fecha_procesada>=$bonificacion[$options['bonificacion_modelo']]['inicio']) && ($fecha_procesada<=$bonificacion[$options['bonificacion_modelo']]['fin'])){
+								if(($processed_date>=$bonificacion[$options['bonificacion_modelo']]['inicio']) && ($processed_date<=$bonificacion[$options['bonificacion_modelo']]['fin'])){
 									$bonificacion_dias=$bonificacion[$options['bonificacion_modelo']]['dias'];
 									$bonificacion_tipo=$bonificacion[$options['bonificacion_modelo']]['tipo'];
 								}elseif($bonificacion[$options['bonificacion_modelo']]['completo']==1){
@@ -404,8 +409,8 @@ Calendar.setup({
 					endif;
 
 
-					if(isset($options['disponibilidad'][$fecha_procesada])){
-						if($options['disponibilidad'][$fecha_procesada]){
+					if(isset($options['disponibilidad'][$processed_date])){
+						if($options['disponibilidad'][$processed_date]){
 							$clase_temporada='disponible';
 						}
 						else{
@@ -417,13 +422,13 @@ Calendar.setup({
 
 
 					if(empty($class)){
-						if(!empty($clase_temporada)){
-							$class=' class="'.$clase_temporada.'" ';
+						if(!empty($period_class)){
+							$class=' class="'.$period_class.'" ';
 						}
 					}
 					else{
-						if(!empty($clase_temporada)){
-							$class.=' '.$clase_temporada.'" ';
+						if(!empty($period_class)){
+							$class.=' '.$period_class.'" ';
 						}
 						else{
 							$class.='" ';
@@ -433,16 +438,16 @@ Calendar.setup({
     				if($function!=false){
 						$fecha_valor=sprintf('%02d/%02d/%04d',$day,$month_num,$year);
 
-						if(isset($options['fecha_inicio'])&& $options['fecha_inicio']==$fecha_procesada){
+						if(isset($options['start'])&& $options['start']==$processed_date){
 							$clase_enlace='class="seleccionado_inicio" ';
 						}
-						elseif(isset($options['fecha_fin'])&& $options['fecha_fin']==$fecha_procesada){
+						elseif(isset($options['end'])&& $options['end']==$processed_date){
 							$clase_enlace='class="seleccionado_fin" ';
 						}
 						else{
 							$clase_enlace='';
 						}
-	    				$str .= '<td ' . $class. '><div class="cell-number"><a '.$clase_enlace.'href="#" onclick="'.$function.'(\''.$fecha_valor.'\',\''.$fecha_procesada.'\',this);return false;">' . $day . '</a></div>';
+	    				$str .= '<td ' . $class. '><div class="cell-number"><a '.$clase_enlace.'href="#" onclick="'.$function.'(\''.$fecha_valor.'\',\''.$processed_date.'\',this);return false;">' . $day . '</a></div>';
     				}
     				else{
     					$str .= '<td ' . $class. '><div class="cell-number">' . $day . '</div>';
