@@ -68,6 +68,8 @@ class DateHelper extends Helper
 				break;
 			case 'compacta_hora': $format_string='%e %b %Y, %H:%M';
 				break;
+			case 'time': $format_string="%H:%M";
+				break;
 			case 'normal':
 			default:		$format_string='%e %b %Y';
 		}
