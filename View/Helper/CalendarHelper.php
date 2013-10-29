@@ -355,14 +355,14 @@ Calendar.setup({
 						endforeach;
 					endif;
 
-					if(isset($options['habitacion_limites'])):
-						if(isset($options['cantidad_por_defecto'])){
-							$cantidad_por_defecto=$options['cantidad_por_defecto'];
+					if(isset($options['available_limits'])):
+						if(isset($options['default_quantity'])){
+							$default_quantity=$options['default_quantity'];
 						}
 						else{
-							$cantidad_por_defecto=0;
+							$default_quantity=0;
 						}
-					$cantidad_habitacion=false;
+					$avaliable_quantity=false;
 
 
 					//debug($processed_date);
@@ -370,10 +370,10 @@ Calendar.setup({
 					 * Si quitamos el if (empty invertiremos la prioridad de las temporadas
 					 */
 
-						foreach($options['habitacion_limites'] as $habitacion_limite):
-							//if(!($cantidad_habitacion)){
-								if(($processed_date>=$habitacion_limite[$options['habitacion_limites_modelo']]['inicio']) && ($processed_date<=$habitacion_limite[$options['habitacion_limites_modelo']]['fin'])){
-									$cantidad_habitacion=$habitacion_limite[$options['habitacion_limites_modelo']]['cantidad'];
+						foreach($options['available_limits'] as $available_limit):
+							//if(!($avaliable_quantity)){
+								if(($processed_date>=$available_limit[$options['available_limits_model']]['start_date']) && ($processed_date<=$available_limit[$options['available_limits_model']]['end_date'])){
+									$avaliable_quantity=$available_limit[$options['available_limits_model']]['quantity'];
 
 								}
 							//}
@@ -397,8 +397,8 @@ Calendar.setup({
 					 */
 
 						foreach($options['bonificaciones'] as $bonificacion):
-							//if(!($cantidad_habitacion)){
-								if(($processed_date>=$bonificacion[$options['bonificacion_modelo']]['inicio']) && ($processed_date<=$bonificacion[$options['bonificacion_modelo']]['fin'])){
+							//if(!($avaliable_quantity)){
+								if(($processed_date>=$bonificacion[$options['bonificacion_modelo']]['start_date']) && ($processed_date<=$bonificacion[$options['bonificacion_modelo']]['end_date'])){
 									$bonificacion_dias=$bonificacion[$options['bonificacion_modelo']]['dias'];
 									$bonificacion_tipo=$bonificacion[$options['bonificacion_modelo']]['tipo'];
 								}elseif($bonificacion[$options['bonificacion_modelo']]['completo']==1){
@@ -439,15 +439,15 @@ Calendar.setup({
 						$fecha_valor=sprintf('%02d/%02d/%04d',$day,$month_num,$year);
 
 						if(isset($options['start'])&& $options['start']==$processed_date){
-							$clase_enlace='class="seleccionado_inicio" ';
+							$link_class='class="start_selector" ';
 						}
 						elseif(isset($options['end'])&& $options['end']==$processed_date){
-							$clase_enlace='class="seleccionado_fin" ';
+							$link_class='class="end_selector" ';
 						}
 						else{
-							$clase_enlace='';
+							$link_class='';
 						}
-	    				$str .= '<td ' . $class. '><div class="cell-number"><a '.$clase_enlace.'href="#" onclick="'.$function.'(\''.$fecha_valor.'\',\''.$processed_date.'\',this);return false;">' . $day . '</a></div>';
+	    				$str .= '<td ' . $class. '><div class="cell-number"><a '.$link_class.'href="#" onclick="'.$function.'(\''.$fecha_valor.'\',\''.$processed_date.'\',this);return false;">' . $day . '</a></div>';
     				}
     				else{
     					$str .= '<td ' . $class. '><div class="cell-number">' . $day . '</div>';
@@ -456,13 +456,13 @@ Calendar.setup({
     				if($show_events){
     					$str.='<div class="cell-data">' . $cell . '</div>';
     				}
-    				if(isset($cantidad_habitacion)){
-    					if($cantidad_habitacion!==false){
-    						$str.='<div class="cell-data disponibilidad">' . $cantidad_habitacion . '</div>';
+    				if(isset($avaliable_quantity)){
+    					if($avaliable_quantity!==false){
+    						$str.='<div class="cell-data disponibilidad">' . $avaliable_quantity . '</div>';
 
     					}
     					else{
-    						$str.='<div class="cell-data disponibilidad_defecto">' . $cantidad_por_defecto . '</div>';
+    						$str.='<div class="cell-data disponibilidad_defecto">' . $default_quantity . '</div>';
     					}
     				}
 
