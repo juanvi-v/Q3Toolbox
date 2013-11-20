@@ -106,7 +106,8 @@ class CalendarHelper extends FormHelper
 			$html_id='cal';
 		}
 
-        $out[] = sprintf('<div class="campo"><strong id="%s-%s-%s-date-display" class="date-field" >%s</strong><input type="hidden" id="%s-%s-%s-date-input" name="data[%s][%s]" value="%s" />&nbsp;&nbsp;<button class="small" type="button" id="%s-%s-%s-date-button">'.$this->Html->image('iconos/calendario.png',array('width'=>16,'height'=>16,'alt'=>__d('q3_toolbox','Show calendar',true))).'</button></div>',
+
+        $out[] = sprintf('<div class="input"><strong id="%s-%s-%s-date-display" class="date-field" >%s</strong><input type="hidden" id="%s-%s-%s-date-input" name="data[%s][%s]" value="%s" />&nbsp;&nbsp;<button class="small" type="button" id="%s-%s-%s-date-button">'.$this->Html->image('icons/calendar.png',array('width'=>16,'height'=>16,'alt'=>__d('q3_toolbox','Show calendar',true))).'</button></div>',
         	$html_id,
             $this->model,
             $this->field,
@@ -122,6 +123,13 @@ class CalendarHelper extends FormHelper
             $this->field
         );
 
+
+        if(!empty($htmlAttributes['onClose'])){
+        	$onclose=$htmlAttributes['onClose'];
+        }
+        else{
+        	$onclose='false';
+        }
         /* Render the JavaScript code */
         $out[] = sprintf('
 <script type="text/javascript">
@@ -134,7 +142,8 @@ Calendar.setup({
     align           :   "%s",                                           // Alignment (defaults to "Bl")
     singleClick     :   true,
     weekNumbers     :   false,
-    showsTime       :   %s
+    showsTime       :   %s,
+    onClose			:	function(){%s},
 });
 </script>',
         	$html_id,
@@ -149,7 +158,8 @@ Calendar.setup({
             $this->field,
             $displayFormat['jscalendar'],
             $align,
-            preg_match( '/:/', $displayFormat['jscalendar'] ) == true ? 'true' : 'false'
+            preg_match( '/:/', $displayFormat['jscalendar'] ) == true ? 'true' : 'false',
+        	$onclose
         );
 
         $out = join( '', $out );
