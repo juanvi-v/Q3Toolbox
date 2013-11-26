@@ -280,7 +280,7 @@ Calendar.setup({
     		$first_day_in_month--;
     	}
 
-    	$str .= '<table class="calendar">';
+    	$str .= '<table class="full_calendar">';
 
     	$str .= '<thead>';
 
@@ -358,7 +358,7 @@ Calendar.setup({
 
 						foreach($options['periods'] as $period):
 							if(empty($period_class)){
-								if(($processed_date>=$period['Period']['start_date']) && ($processed_date<=$period['Period']['end_date'])){
+								if(($processed_date>=$this->extractDate($period['Period']['start_date'])) && ($processed_date<=$this->extractDate($period['Period']['end_date']))){
 									$period_class='period_color_'.$period['Period']['color'];
 								}
 							}
@@ -382,7 +382,7 @@ Calendar.setup({
 
 						foreach($options['available_limits'] as $available_limit):
 							//if(!($avaliable_quantity)){
-								if(($processed_date>=$available_limit[$options['available_limits_model']]['start_date']) && ($processed_date<=$available_limit[$options['available_limits_model']]['end_date'])){
+								if(($processed_date>=$this->extractDate($available_limit[$options['available_limits_model']]['start_date'])) && ($processed_date<=$this->extractDate($available_limit[$options['available_limits_model']]['end_date']))){
 									$avaliable_quantity=$available_limit[$options['available_limits_model']]['quantity'];
 
 								}
@@ -513,7 +513,18 @@ Calendar.setup({
     	return $str;
     }
 
+    /**
+     * Auxiliar functions
+     */
 
+    /**
+     * extracts the date from a datetime string.
+     * @param datetime $datetime
+     * @return date
+     */
 
+	function extractDate($datetime){
+		return date('Y-m-d',strtotime($datetime));
+	}
 
 }//class
