@@ -68,7 +68,8 @@ class CalendarHelper extends FormHelper
 
 
         if(!empty($value)){
-        	$display_value = strftime( $displayFormat['php'], strtotime($value) );
+        	$date_string = strftime( $displayFormat['php'], strtotime($value) );
+		$display_value=htmlentities($date_string,ENT_COMPAT,mb_detect_encoding($date_string,array('UTF-8','iso-8859-1')));
         }
         else{
         	$display_value=__d('q3_toolbox','no date',true);
