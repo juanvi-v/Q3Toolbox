@@ -358,7 +358,7 @@ function hex2RGB($hexStr, $returnAsString = false, $seperator = ',') {
 	}
 
 	/**
-	 * @method wpautoop
+	 * @method wpautop
 	 * This is a html format function for Wordpress Posts
 	 * @param string $pee
 	 * @param boolean $br
