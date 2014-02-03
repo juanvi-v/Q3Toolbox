@@ -127,8 +127,10 @@ class CalendarHelper extends FormHelper
 
         if(!empty($htmlAttributes['onClose'])){
         	$onclose=$htmlAttributes['onClose'];
+        	$handler='onClose';
         }
         else{
+        	$handler='patata';
         	$onclose='false';
         }
         /* Render the JavaScript code */
@@ -144,7 +146,7 @@ Calendar.setup({
     singleClick     :   true,
     weekNumbers     :   false,
     showsTime       :   %s,
-    onClose			:	function(){%s},
+    %s			:	function(){%s},
 });
 </script>',
         	$html_id,
@@ -160,6 +162,7 @@ Calendar.setup({
             $displayFormat['jscalendar'],
             $align,
             preg_match( '/:/', $displayFormat['jscalendar'] ) == true ? 'true' : 'false',
+        	$handler,
         	$onclose
         );
 
