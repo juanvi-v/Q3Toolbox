@@ -94,6 +94,38 @@ class ToolsComponent extends Component
 		return $formated_price;
 	}
 
+	/** @method makeLocator
+	 * makes a unique locator code, checking for duplicates in model
+	 *
+	 * @param number $length
+	 * @return string
+	 */
+	public function makeLocator($length=7,$field=null,$model=null,$conditions=array()) {
+		// removed ambiguous chars 1/I 0/O
+		$chars = "23456789ABCDEFGHJKLMNPRQSTUVWXYZ";
+		$locator = '';
+		$clen = strlen($chars) - 1;  //a variable with the fixed length of chars correct for the fence post issue
+		do{
+			for ( $i=0; $i<$length; $i++) {
+				$locator .= $chars[mt_rand(0,$clen)];  //mt_rand's range is inclusive - this is why we need 0 to n-1
+			}
+			//check for duplicated
+			if(!empty($field) && !empty($model)){
+				$MyModel=ClassRegistry::init($model);
+				if($MyModel->hasField($field)){
+					$conditions[$model.'.'.$field]=$locator;
+					$duplicated=$MyModel->find('first',compact('conditions'));
+					if(!empty($duplicated)){
+						$locator='';
+					}
+				}
+				// @TODO should be invalitade if field doesn't exist?
+			}
+		}while(empty($locator));
+
+		return $locator;
+	}
+
 
 	/**
 	 * convierte a entidades html, detectando la codificacion.
