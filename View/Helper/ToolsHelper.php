@@ -358,6 +358,16 @@ function hex2RGB($hexStr, $returnAsString = false, $seperator = ',') {
 	}
 
 	/**
+	 * Gets slugs from current string using - as separator
+	 * @param string $wild_string any string
+	 * @return string slug
+	 */
+	public function slug($wild_string=null){
+		return strtolower(Inflector::slug($wild_string,'-'));
+	}
+
+
+	/**
 	 * @method wpautop
 	 * This is a html format function for Wordpress Posts
 	 * @param string $pee
