@@ -11,10 +11,21 @@ class ToolsComponent extends Component
 	 * @param string $str
 	 * @return float
 	 */
-	function str2num($str){
-		if(strpos($str, '.') < strpos($str,',')){
-			$str = str_replace('.','',$str);
-			$str = strtr($str,',','.');
+	function str2num($str,$decimal=2){
+		$reverse=strrev($str);
+		$dot_pos=strpos($reverse, '.');
+		$comma_pos=strpos($reverse,',');
+
+		if($dot_pos > $comma_pos){
+			if($comma_pos===false){
+				if(($dot_pos==3) && ($decimal<>3)){
+					$str = str_replace('.','',$str);
+				}
+			}
+			else{
+				$str = str_replace('.','',$str);
+				$str = strtr($str,',','.');
+			}
 		}
 		else{
 			$str = str_replace(',','',$str);
