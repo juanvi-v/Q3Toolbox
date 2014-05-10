@@ -28,7 +28,17 @@ class ToolsComponent extends Component
 			}
 		}
 		else{
-			$str = str_replace(',','',$str);
+			if($dot_pos===false){
+				if(($comma_pos==3) && ($decimal<>3)){
+					$str = str_replace(',','',$str);
+				}
+				else{
+					$str = strtr($str,',','.');
+				}
+			}
+			else{
+				$str = str_replace(',','',$str);
+			}
 		}
 		return (float)$str;
 	}
