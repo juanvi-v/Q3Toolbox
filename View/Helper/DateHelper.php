@@ -73,17 +73,22 @@ class DateHelper extends Helper
 			case 'normal':
 			default:		$format_string='%e %b %Y';
 		}
-		/*
-		 * ordinal tweak
-		 */
-		$date_value=strtotime($date);
-		$format_string = str_replace('%O', date('S', $date_value), $format_string);
-
-		$date_string=strftime($format_string,$date_value);
-		/*
-		 * htmlentities ftw
-		 */
-		return htmlentities($date_string,ENT_COMPAT,mb_detect_encoding($date_string,array('UTF-8','iso-8859-1')));
+		if(!empty($date)){
+			/*
+			 * ordinal tweak
+			 */
+			$date_value=strtotime($date);
+			$format_string = str_replace('%O', date('S', $date_value), $format_string);
+	
+			$date_string=strftime($format_string,$date_value);
+			/*
+			 * htmlentities ftw
+			 */
+			return htmlentities($date_string,ENT_COMPAT,mb_detect_encoding($date_string,array('UTF-8','iso-8859-1')));
+		}
+		else{
+			return '';
+		}
 	}
 
 
